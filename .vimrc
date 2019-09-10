@@ -82,3 +82,12 @@ endif
 " followed by text. Change the stuff between // to
 " change the search pattern.
 command Todo noautocmd vimgrep /^\s*[ ].*/j **/*.todo | cw
+
+" Enable spell check
+set spell
+
+" Enable spelling correction without moving cursor
+function! FixLastSpellingError()
+	normal! mm[s1z=`m
+endfunction
+nnoremap <leader>sp :call FixLastSpellingError()<cr>
