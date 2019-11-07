@@ -1,3 +1,6 @@
+" set background color in vim
+set background=dark
+
 " file encodings
 set encoding=utf-8
 
@@ -6,6 +9,9 @@ set encoding=utf-8
 " set split positions
 set splitbelow
 set splitright
+
+" Set line numbers
+set nu
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -42,9 +48,7 @@ filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Autocompletion plugin: YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -57,6 +61,11 @@ Plugin 'fisadev/fisa-vim-colorscheme'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'fisadev/vim-isort'
 Plugin 'lilydjwg/colorizer'
+Plugin 'tpope/vim-surround'
+Plugin 'majutsushi/tagbar'
+Plugin 'junegunn/fzf.vim'
+Plugin 'dense-analysis/ale'
+
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -76,11 +85,7 @@ if bufwinnr(1)
   map + <C-W><DOWN>
 endif
 
-" state retention for vim-todo-lists.
-" Searches inside file with extension '.todo'.
-" Assumes that an item starts with any number of
-" followed by text. Change the stuff between // to
-" change the search pattern.
+" state retention for vim-todo-lists
 command Todo noautocmd vimgrep /^\s*[ ].*/j **/*.todo | cw
 
 " Enable spell check
@@ -91,3 +96,18 @@ function! FixLastSpellingError()
 	normal! mm[s1z=`m
 endfunction
 nnoremap <leader>sp :call FixLastSpellingError()<cr>
+
+" pause a terminal session and move to window above it
+nnoremap <leader>tp:normal! <C-\><C-n><C-k><cr>
+
+" Jedi Settigs
+let g:jedi#popup_on_dot = 0
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#documentation_command = "K"
+let g:jedi#completions_command = "<C-Space>"
+
+" Vim ALE Settings
+"let g:ale_echo_cursor = 0
+let g:ale_lint_on_enter = 0
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
