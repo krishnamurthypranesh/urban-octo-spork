@@ -1,6 +1,3 @@
-" set background color in vim
-set background=dark
-
 " file encodings
 set encoding=utf-8
 
@@ -11,7 +8,11 @@ set splitbelow
 set splitright
 
 " Set line numbers
-set nu
+set number
+set relativenumber
+
+set scrolloff=3 " keep three lines between the cursor and the edge of the screen
+"set mouse=a
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -65,6 +66,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar'
 Plugin 'junegunn/fzf.vim'
 Plugin 'dense-analysis/ale'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 call vundle#end()            " required
 
@@ -110,4 +113,18 @@ let g:jedi#completions_command = "<C-Space>"
 "let g:ale_echo_cursor = 0
 let g:ale_lint_on_enter = 0
 let g:ale_sign_column_always = 1
-let g:ale_lint_on_text_changed = 'never'
+
+" Enable autocompletion, syntax highlighting and tagbar
+filetype plugin on
+
+syntax on
+
+set omnifunc=syntaxcomplete#Complete
+
+nmap <F8> :TagbarToggle<CR>
+
+" colorscheme options
+let g:lucius_style="dark"
+let g:lucius_contrast="low"
+colo lucius
+set background=dark
