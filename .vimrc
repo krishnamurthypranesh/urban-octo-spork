@@ -128,3 +128,14 @@ let g:lucius_style="dark"
 let g:lucius_contrast="low"
 colo lucius
 set background=dark
+
+
+" Perform directory wide search for a string in a file
+function! DirectoryWideStringSearch(pattern)
+	silent execute "grep! -R " . shellescape(expand(a:pattern)) . " ."
+	cw
+endfunction
+	
+command! -nargs=1 Search call DirectoryWideStringSearch(<args>)
+	
+:nnoremap <leader>ss :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
